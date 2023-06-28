@@ -1,0 +1,182 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    padding:0;
+}
+.video-cont
+{
+    background-color:black;
+    height:100vh;
+    width:100vw;
+}
+video
+{
+    height:100%;
+    width:100%;
+    /* filter: drop-shadow(0 0 0.75rem crimson); */
+}
+.action-cont
+{
+    height:15rem;
+    width:5rem;
+    /* background-color: lightblue; */
+    position: absolute;
+    top:0;
+    right:5rem;
+    color:white;
+    top:calc((100vh - 15rem)/2);
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.action-cont > *
+{
+    width: 100%;
+    height: 5rem;
+    /* background-color: lightgreen; */
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:3px solid whitesmoke;
+    z-index: 2;
+}
+.record-btn-cont
+{
+    /* background-color: tomato; */
+}
+.capture-btn-cont
+{
+    /* background-color: tomato; */
+    /* color: black; */
+}
+.record-btn
+{
+       background-color: red;
+       height:4rem;
+       width:4rem;
+       border-radius: 95%;
+       cursor: pointer;
+}
+.capture-btn
+{
+    background-color: white;
+    height:4rem;
+    width:4rem;
+    border-radius: 95%;
+    cursor: pointer;
+}
+.scale-record
+{
+    animation-name: scale-record;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+}
+.scale-capture
+{
+    animation-name: scale-capture;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+@keyframes scale-record{
+    0%
+    {
+        transform: scale(0.8);
+    }
+    100%
+    {
+        transform: scale(1.1);
+    }
+}
+@keyframes scale-capture{
+    0%
+    {
+        transform: scale(0.8);
+    }
+    100%
+    {
+        transform: scale(1.1);
+    }
+}
+.timer-cont
+{
+    position: absolute;
+    top:0;
+    left:0;
+    color:white;
+    font-size: small;
+}
+.filter-cont
+{
+    position: absolute;
+    top:calc((100vh - 36rem)/2);;
+    left:5rem;
+    height:16rem;
+    width:6rem;
+    /* background-color: aqua; */
+    z-index: 2;
+}
+.filter{
+    z-index: 3;
+  height:4rem;
+  width:6rem;
+  background-image: url(./pic.jpg);  
+  background-size: contain;
+  background-blend-mode: color-burn;
+}
+.blur{
+    cursor: pointer;
+  /* background-color:#ff000018; */
+  filter: blur(0.5rem);
+}
+.bright{
+    cursor: pointer;
+    filter: brightness(1.75);
+}
+.contrast{
+    cursor: pointer;
+    filter: contrast(1.75);
+}
+
+.grayscale
+{
+    cursor: pointer;
+    filter: grayscale(1);
+}
+.huerotate
+{
+    cursor: pointer;
+    filter: hue-rotate(-0.25turn);
+}
+.invert
+{
+    cursor: pointer;
+    filter: invert(1);
+}
+.opacity
+{
+    cursor: pointer;
+    filter: opacity(50%);
+}
+.saturate
+{
+    cursor: pointer;
+    filter: saturate(4);
+}
+.sepia
+{
+    cursor: pointer;
+    filter: sepia(1);
+}
+.filter-layer{
+    position:absolute;
+    z-index: 0;
+    top:0;
+    left:0;
+    height:100vh;
+    width:100vw;
+    /* background-color: red; */
+}
