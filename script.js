@@ -21,7 +21,7 @@ let transparentcolor="transparent";
 let recordbtncont = document.querySelector(".record-btn-cont")
 let recordbtn = document.querySelector(".record-btn")
 let capturebtncont = document.querySelector(".capture-btn-cont")
-let capturebtn= document.querySelector(".capture-bt")
+let capturebtn= document.querySelector(".capture-btn")
 // navigator is global object that tells informtaion related to browser
 window.navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
     video.srcObject = stream // add to video element
@@ -35,11 +35,23 @@ window.navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
     recorder.addEventListener("stop", (e) => {
         //convert media chunks to video
         let blob = new Blob(chunks, { type: "video/mp4" });
-        let videourl = window.URL.createObjectURL(blob);
-        let a = document.createElement("a");
-        a.href = videourl;
-        a.download = "stream.mp4"
-        a.click();
+
+        if(db)
+        {
+            let videoid=shortid();
+            let dbtranssaction=db.transaction("video","readwrite");
+            let videostore=dbtranssaction.objectStore("video");
+            let videoEntry={
+                id:`vid-${videoid}`,
+                blobdata:blob
+            }
+            videostore.add(videoEntry)
+        }
+        // let videourl = window.URL.createObjectURL(blob);
+        // let a = document.createElement("a");
+        // a.href = videourl;
+        // a.download = "stream.mp4"
+        // a.click();
 
 
     })
@@ -63,7 +75,7 @@ recordbtncont.addEventListener("click", (e) => {
 })
 let timerid;
 let counter = 0;
-console.log(document.title);
+// console.log(document.title);
 function startTimer() {
     timerid = setInterval(() => {
         let seconds = counter;
@@ -83,7 +95,7 @@ function stopTimer() {
     document.title = "Camera Gallery"
 }
 capturebtncont.addEventListener("click",(e)=>{
-   
+   capturebtn.classList.add("scale-image")
     let canvas=document.createElement("canvas");
     canvas.width=video.videoWidth; //px
     canvas.height=video.videoHeight; // px
@@ -94,10 +106,23 @@ capturebtncont.addEventListener("click",(e)=>{
     //  tool.fillRect(0,0,canvas.width,canvas.height)
     // canvas.classList.toggle(transparentcolor);
      let imageurl=canvas.toDataURL(); // create a url of image 
-     let a=document.createElement("a");
-     a.href=imageurl;
-     a.download="capture.jpeg";
-     a.click();
+
+     if(db)
+     {
+         let imageid=shortid();
+         let dbtransaction=db.transaction("image","readwrite");
+         let imagestore=dbtransaction.objectStore("image");
+         let imageEntry={
+             id:`img-${imageid}`,
+             url:imageurl
+         }
+         imagestore.add(imageEntry)
+     }
+     setTimeout(()=>{
+      
+        capturebtn.classList.remove("scale-capture")
+     },1000)
+   
 })
 let filters=document.querySelectorAll(".filter")
 filters.forEach((filter)=>{
