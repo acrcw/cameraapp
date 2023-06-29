@@ -12,7 +12,7 @@ setTimeout(() => {
                 mediaeleme.setAttribute("class", "media-cont");
                 mediaeleme.setAttribute("id", video.id);
                 let url = URL.createObjectURL(video.blobdata)
-                mediaeleme.innerHTML = `<video autoplay="true" loop src="${url}"></video><div class="media-action-cont"><div class="download"><span class="material-icons">file_download</span></div><div class="delete"><span class="material-icons">delete</span></div></div>`;
+                mediaeleme.innerHTML = `<video autoplay loop src="${url}"></video><div class="media-action-cont"><div class="download"><span class="material-icons">file_download</span></div><div class="delete"><span class="material-icons">delete</span></div></div>`;
                 let deleteele = mediaeleme.querySelector(".delete");
                 deleteele = mediaeleme.addEventListener("click", deletelistner);
                 let download = mediaeleme.querySelector(".download")
@@ -72,6 +72,7 @@ function deletelistner(e) {
 }
 function downloadlistner(e) {
     // let vid=e.target.parentElement.parentElement.parentElement.getAttribute("id")
+    e.stopPropagation();
     let id = e.target.parentElement.parentElement.parentElement.getAttribute("id");
     if (id.slice(0, 3) === "vid") {
         let dbtransaction = db.transaction("video", "readwrite");

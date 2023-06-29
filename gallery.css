@@ -37,7 +37,7 @@ body{
     object-fit:fill; 
 }
 .media-cont:hover{
-    z-index: 1000;
+    z-index:black;
         transform: translateY(-10px);
         border-radius: 10px;
         transform: scale(1.1);
@@ -75,7 +75,7 @@ body{
     left:0rem;
     bottom: 0.1rem;
  
-    color:white;
+    color:black;
 }
 .delete{
     position: relative;
@@ -100,7 +100,7 @@ body{
  
    
    
-    color:white;
+    color:black;
 }
 video{
     position: relative;    /* top:0; */
